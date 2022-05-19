@@ -5,6 +5,9 @@ public class Sketch extends PApplet {
 
   int[][] intGrid;
 
+  int intRowContinuousCount = 0;
+  int intSelectedColumnCount = 0;
+  int intSelectedRowCount = 0;
   int intSelectedCount = 0;
   int CELL_WIDTH = 20;
   int CELL_HEIGHT = 20;
@@ -110,14 +113,53 @@ public class Sketch extends PApplet {
           
   
         }
-
-       
-
-
       }
     }
 
     System.out.println("Total of " + intSelectedCount + " selected");
+   
+    for(int row = 0; row <ROW_COUNT; row++) {
+      for(int column = 0; column < COLUMN_COUNT; column++) {
+        if(intGrid[row][column] == 1) {
+          intSelectedRowCount++;
+        }
+        
+        if(column < COLUMN_COUNT && column >0) {
+          if(intGrid[row][column] == 1 && intGrid[row][column-1] == 1) {
+            intRowContinuousCount++;
+          } else if (intGrid[row][column] == 1 && intGrid[row][column+1] == 1) {
+            intRowContinuousCount++;
+          }
+        }
+      }
+
+    if(intRowContinuousCount > 2) {
+      System.out.println("There are " + intRowContinuousCount + " continuous blocks selected on row " + (row+1));
+    }
+      System.out.println("Row " + (row+1) + " has " + intSelectedRowCount + " cells selected");
+      intSelectedRowCount = 0;
+      intRowContinuousCount = 0;
+    }
+
+  
+    for(int column = 0; column < COLUMN_COUNT; column++) {
+      for(int row = 0; row < ROW_COUNT; row++) {
+        if(intGrid[row][column] == 1) {
+          intSelectedColumnCount++;
+        }
+      }
+    
+      System.out.println("Column " + (column+1) + " has " + intSelectedColumnCount + " cells selected");
+      intSelectedColumnCount = 0;
+    }
+
+    
+
+
+
+
+
+
 
   }
 
