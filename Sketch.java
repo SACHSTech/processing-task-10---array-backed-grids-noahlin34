@@ -124,12 +124,15 @@ public class Sketch extends PApplet {
           intSelectedRowCount++;
         }
         
-        if(column < COLUMN_COUNT && column >0) {
+        if(column < COLUMN_COUNT-1 && column >0) {
           if(intGrid[row][column] == 1 && intGrid[row][column-1] == 1) {
             intRowContinuousCount++;
-          } else if (intGrid[row][column] == 1 && intGrid[row][column+1] == 1) {
-            intRowContinuousCount++;
+          } else if (column < COLUMN_COUNT-1 && column > 0) {
+            if (intGrid[row][column] == 1 && intGrid[row][column+1] == 1) {
+              intRowContinuousCount++;
+            }
           }
+          
         }
       }
 
